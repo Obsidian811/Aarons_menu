@@ -69,8 +69,8 @@ export default function Home() {
             className="transition-opacity duration-500 ease-in-out text-center"
             style={{ opacity: transition.opacity }}
           >
-            <h1 className="text-6xl font-bold mb-4">FREDDY'S</h1>
-            <p className="text-lg">Authentic South Indian Cuisine</p>
+            <h1 className="text-6xl font-bold mb-4">Aaron'S</h1>
+            <p className="text-lg"></p>
           </div>
         )}
 
