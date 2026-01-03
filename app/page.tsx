@@ -61,7 +61,7 @@ export default function Home() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-black text-white">
+    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-red-900 to-rose-950 text-white">
       <div className="w-full max-w-4xl p-8">
         {/* Hotel Name Section */}
         {transition.current === 'hotel' && (
