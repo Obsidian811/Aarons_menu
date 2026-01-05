@@ -67,7 +67,7 @@ export default function HindiMenu() {
     "https://docs.google.com/spreadsheets/d/e/2PACX-1vTeVv9QsEicZ5EO8ta9VSzVjt1Zw5rH-AqEekpRhMJQrfjjoqlzA3UwJkDU4aK3TNQ0tj6L27DslgKV/pub?output=csv&gid=236523802";
 
   const handleBack = () => {
-    sessionStorage.setItem('fromLanguageMenu', 'true');
+    // No need to set anything - localStorage persists the "hasSeenIntro" flag
     window.location.href = '/';
   };
 

@@ -13,12 +13,11 @@ export default function Home() {
   });
 
   useEffect(() => {
-    // Check if we're coming back from a language menu
-    const fromLanguageMenu: boolean = sessionStorage.getItem('fromLanguageMenu') === 'true';
+    // Check if we've already shown the intro (persists across page reloads)
+    const hasSeenIntro: boolean = localStorage.getItem('hasSeenIntro') === 'true';
     
-    if (!fromLanguageMenu) {
-      // Run transition sequence for fresh loads and reloads
-      sessionStorage.removeItem('fromLanguageMenu');
+    if (!hasSeenIntro) {
+      // Run transition sequence for fresh page opens
       const transitionSequence = async () => {
         // Start with hotel name
         setTransition({ current: 'hotel', opacity: 1 });
@@ -36,11 +35,14 @@ export default function Home() {
         
         await new Promise(resolve => setTimeout(resolve, 500)); // Fade out time
         setTransition({ current: 'language', opacity: 1 });
+        
+        // Mark that user has seen the intro
+        localStorage.setItem('hasSeenIntro', 'true');
       };
 
       transitionSequence();
     } else {
-      // Skip transition for back navigation
+      // Skip transition if they've already seen the intro
       setTransition({ current: 'language', opacity: 1 });
     }
   }, []);
