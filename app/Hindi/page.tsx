@@ -58,9 +58,9 @@ export default function HindiMenu() {
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
   const [categoryItems, setCategoryItems] = useState<MenuItem[]>([]);
   // Use a string for selectedCategory based on the 'id' in parentCategories
-  const [selectedCategory, setSelectedCategory] = useState<string>('breakfast');
-  // New state for selected sub-category. Initialize with the first sub-category of 'breakfast'
-  const [selectedSubCategory, setSelectedSubCategory] = useState<string>(getFirstSubCategory('breakfast'));
+  const [selectedCategory, setSelectedCategory] = useState<string>('');
+  // New state for selected sub-category. Initialize with null (no category selected)
+  const [selectedSubCategory, setSelectedSubCategory] = useState<string | null>(null);
   const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null);
 
   const GOOGLE_CSV_URL =
@@ -247,11 +247,15 @@ export default function HindiMenu() {
             </div>
           ))}
 
-          {categoryItems.length === 0 && (
+          {!selectedSubCategory ? (
+            <p className="text-center text-gray-400 py-10 text-lg">
+              मेनू आइटम देखने के लिए कोई श्रेणी चुनें
+            </p>
+          ) : categoryItems.length === 0 ? (
             <p className="text-center text-gray-400 py-10 text-lg">
               **{currentSubCategories.find(sub => sub.id === selectedSubCategory)?.name || selectedSubCategory}** अनुभाग में कोई आइटम नहीं मिला।
             </p>
-          )}
+          ) : null}
         </div>
       </main>
 

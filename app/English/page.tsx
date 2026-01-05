@@ -63,9 +63,9 @@ export default function EnglishMenu() {
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
   const [categoryItems, setCategoryItems] = useState<MenuItem[]>([]);
   // Use a string for selectedCategory based on the 'id' in parentCategories
-  const [selectedCategory, setSelectedCategory] = useState<string>('breakfast');
-  // New state for selected sub-category. Initialize with the first sub-category of 'breakfast'
-  const [selectedSubCategory, setSelectedSubCategory] = useState<string>(getFirstSubCategory('breakfast'));
+  const [selectedCategory, setSelectedCategory] = useState<string>('');
+  // New state for selected sub-category. Initialize with null (no category selected)
+  const [selectedSubCategory, setSelectedSubCategory] = useState<string | null>(null);
   const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null);
 
   const GOOGLE_CSV_URL =
@@ -249,11 +249,15 @@ export default function EnglishMenu() {
             </div>
           ))}
 
-          {categoryItems.length === 0 && (
+          {!selectedSubCategory ? (
+            <p className="text-center text-gray-400 py-10 text-lg">
+              Select a category to view menu items
+            </p>
+          ) : categoryItems.length === 0 ? (
             <p className="text-center text-gray-400 py-10 text-lg">
               No items found in the **{selectedSubCategory}** section.
             </p>
-          )}
+          ) : null}
         </div>
       </main>
 

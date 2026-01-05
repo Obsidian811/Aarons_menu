@@ -56,8 +56,8 @@ const getFirstSubCategory = (parentId: string): string => {
 export default function MarathiMenu() {
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
   const [categoryItems, setCategoryItems] = useState<MenuItem[]>([]);
-  const [selectedCategory, setSelectedCategory] = useState<string>('breakfast');
-  const [selectedSubCategory, setSelectedSubCategory] = useState<string>(getFirstSubCategory('breakfast'));
+  const [selectedCategory, setSelectedCategory] = useState<string>('');
+  const [selectedSubCategory, setSelectedSubCategory] = useState<string | null>(null);
   const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null);
 
   const GOOGLE_CSV_URL =
@@ -227,11 +227,15 @@ export default function MarathiMenu() {
             </div>
           ))}
 
-          {categoryItems.length === 0 && (
+          {!selectedSubCategory ? (
+            <p className="text-center text-gray-400 py-10 text-lg">
+              मेनू आइटम पहा म्हणून एक श्रेणी निवडा
+            </p>
+          ) : categoryItems.length === 0 ? (
             <p className="text-center text-gray-400 py-10 text-lg">
               **{currentSubCategories.find(sub => sub.id === selectedSubCategory)?.name || selectedSubCategory}** विभागात कोणताही आइटम सापडला नाही.
             </p>
-          )}
+          ) : null}
         </div>
       </main>
 
