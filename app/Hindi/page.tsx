@@ -23,27 +23,27 @@ const parentCategories: ParentCategory[] = [
   { id: 'chicken',
     name: 'चिकन',
     icon: '🍗',
-    subCategories: [{ id: 'Chicken', name: 'सभी चिकन' }]
+    subCategories: [{ id: 'Chicken', name: 'चिकन' }]
   },
 { id: 'chicken shawarma',
     name: 'चिकन शावरमा',
     icon: '🌯',
-    subCategories: [{ id: 'Chicken Shawarma', name: 'सभी चिकन शावरमा' }]
+    subCategories: [{ id: 'Chicken Shawarma', name: 'चिकन शावरमा' }]
   },
 { id: 'mutton',
     name: 'मटन',
     icon: '🍖',
-    subCategories: [{ id: 'Mutton', name: 'सभी मटन' }]
+    subCategories: [{ id: 'Mutton', name: 'मटन' }]
   },
 { id: 'biryani',
     name: 'बिरयानी',
     icon: '🍚',
-    subCategories: [{ id: 'Biryani', name: 'सभी बिरयानी' }]
+    subCategories: [{ id: 'Biryani', name: 'बिरयानी' }]
   },
 { id: 'momos',
     name: 'मोमोज़',
     icon: '🥟',
-    subCategories: [{ id: 'Momos', name: 'सभी मोमोज़' }]
+    subCategories: [{ id: 'Momos', name: 'मोमोज़' }]
   },
 
 ];
