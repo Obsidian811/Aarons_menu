@@ -13,11 +13,13 @@ export default function Home() {
   });
 
   useEffect(() => {
-    // Check if we've already shown the intro (persists across page reloads)
-    const hasSeenIntro: boolean = localStorage.getItem('hasSeenIntro') === 'true';
-    
-    if (!hasSeenIntro) {
-      // Run transition sequence for fresh page opens
+    // Check if we're coming back from a language menu or we've already seen the intro
+    const fromLanguageMenu: boolean = sessionStorage.getItem('fromLanguageMenu') === 'true';
+    const hasSeenIntro: boolean = sessionStorage.getItem('hasSeenIntro') === 'true';
+
+    if (!fromLanguageMenu && !hasSeenIntro) {
+      // Run transition sequence for truly fresh loads (not reloads at the language screen)
+      sessionStorage.removeItem('fromLanguageMenu');
       const transitionSequence = async () => {
         // Start with hotel name
         setTransition({ current: 'hotel', opacity: 1 });
@@ -35,15 +37,18 @@ export default function Home() {
         
         await new Promise(resolve => setTimeout(resolve, 500)); // Fade out time
         setTransition({ current: 'language', opacity: 1 });
-        
-        // Mark that user has seen the intro
-        localStorage.setItem('hasSeenIntro', 'true');
+        // Persist that the intro has completed so reloads won't replay it
+        sessionStorage.setItem('hasSeenIntro', 'true');
       };
 
       transitionSequence();
     } else {
-      // Skip transition if they've already seen the intro
+      // Skip transition for back navigation or if intro already seen
       setTransition({ current: 'language', opacity: 1 });
+      // Persist that the intro has been seen so reloads don't replay it
+      sessionStorage.setItem('hasSeenIntro', 'true');
+      // Clear the back-navigation flag
+      sessionStorage.removeItem('fromLanguageMenu');
     }
   }, []);
 
@@ -71,7 +76,7 @@ export default function Home() {
             className="transition-opacity duration-500 ease-in-out text-center"
             style={{ opacity: transition.opacity }}
           >
-            <h1 className="text-6xl font-bold mb-4">Aaron'S</h1>
+            <h1 className="text-6xl font-bold mb-4">AARONS'S</h1>
             <p className="text-lg"></p>
           </div>
         )}
@@ -134,7 +139,7 @@ export default function Home() {
         {process.env.NODE_ENV === 'development' && (
           <button
             onClick={() => {
-              localStorage.removeItem('hasSeenIntro');
+              sessionStorage.removeItem('hasSeenIntro');
               window.location.reload();
             }}
             className="fixed bottom-4 right-4 px-4 py-2 bg-gray-800 text-white rounded-lg opacity-50 hover:opacity-100"
